@@ -1,4 +1,5 @@
 ﻿@page "/"
+@inject IHxMessageBoxService MessageBoxService
 
 <PageTitle>Home</PageTitle>
 
@@ -7,3 +8,13 @@
 <p>Welcome to your new app.</p>
 
 <HxIcon Icon="@BootstrapIcon.HandThumbsUp" CssClass="display-3" />
+
+@code {
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		if (firstRender)
+		{
+			var result = await MessageBoxService.ShowAsync("Info", "This is the text", MessageBoxButtons.OkCancel);
+		}
+	}
+}
